@@ -1,4 +1,4 @@
-## 使用 axios 访问 API  
+## 使用 axios 访问 API   
 1. 安装 axios  
 ``` 
 npm install axios  
@@ -32,3 +32,4 @@ mounted () {
 
 ```
 其中，"data" 中存放需要的数据；
+参考文献：https://cn.vuejs.org/v2/cookbook/using-axios-to-consume-apis.html#%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88
