@@ -114,6 +114,43 @@ destroyed
 </html>
 ```
 得到的结果如下:   
-![运行结果](./images/生命周期函数.png)
+![运行结果](./images/lifecycle.png)  
+1. beforeCreate 和 created 钩子函数之间的生命周期  
+进行初始化事件，数据的观测，在created 的时候数据已经和data 属性进行绑定了，放在data 中的属性当值发生改变时，视图也会改变；  
+2. created 钩子函数和beforeMount 之间的生命周期  
+首先判断对象是否有“el” 选项。如果有的话就继续向下编译，如果没有"el" 选项则停止编译，也意味着停止了生命周期，直到在该vue实例上调用vm.$mount(el)。若是注释掉  el:'#app', 那么执行到created的时候就停止了；如果后面继续调用vm.$mount(el)，可以发现代码继续向下执行了。接下来，是template参数选项的有无对生命周期的影响；  
+（1）如果 vue 实例对象有template参数选项，则将其作为模板编译成render函数；  
+（2）如果没有template选项，则将外部html作为模板进行编译  
+（3）可见，template中的模板优先级要高于外部html；这下就知道为什么 el的判断要在 template 之前了，是因为vue需要通过el找到对应的outer template；  
+在 vue 对象中还有一个render函数，它是以createElement作为参数，做渲染操作，并且可以直接嵌入jsx；  
+```
+new Vue({
+  el: '#app',
+  render: function(createElement) {
+    return createElement('h1', 'this is createElement')
+  }
+ })
+```
+所以综合排名：render函数 > tempalte选项 > outerHTML  
+3. beforeMount 和 mounted 钩子函数之间的生命周期  
+此时是给vue实例对象添加$el成员，并且替换挂载的DOM元素，因为在beforeMount之前el还是undefined；  
+4. mounted  
+```
+beforeMounted 时：
+<div id='app'>
+  <h1>{{ message }}</h1>
+</div>
 
+mounted 之后： 
+<div id='app'>
+  <h1>Vue的生命周期</h1>
+</div>
+```
+在mounted之前h1还是通过{{message}}进行占位的，因为此时还未挂载在页面上，还是以JavaScript中的虚拟DOM形式存在的。在mounted之后h1中的内容才发生了改变；  
+5. beforeUpdate和update期间的生命周期  
+当vue发现data中的数据发生了改变，会触发对应组件的重新渲染  
+6. beforeDestroy和destroyed钩子函数间的生命周期    
+beforeDestroy钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。
+destroyed钩子函数在Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。  
+参考文章：https://segmentfault.com/a/1190000011381906
 
