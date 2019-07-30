@@ -147,7 +147,8 @@ export function get(url, params) {
        });
     }
     ```
-    axios.get() 方法和axios.post() 在提交数据时参数的书写方式是有区别的。get的第二个参数是一个{}，然后这个对象的params属性值是一个参数对象的。而post的第二个参数就是一个参数对象。  
+    axios.get() 方法和axios.post() 在提交数据时参数的书写方式是有区别的。get的第二个参数是一个{}，然后这个对象的params属性
+    值是一个参数对象的。而post的第二个参数就是一个参数对象。  
  封装put请求  
  ```
  export function put(url, data){
