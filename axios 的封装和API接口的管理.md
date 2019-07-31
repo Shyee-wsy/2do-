@@ -54,10 +54,6 @@ getData(){
   axios.interceptors.request.use(
   // 在发送请求之前做些什么
     config =>{
-      config.data => JSON.stringify(config.data);
-      config.headers = {
-        'Content-type':'application/x-www-form-urlencoded'
-      }
       return config;
     },
     error => {
