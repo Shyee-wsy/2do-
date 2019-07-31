@@ -42,16 +42,17 @@ getData(){
    // 设置axios的默认请求地址(自己写项目练习的时候可只写下面这句代码，配置默认请求地址，不用配置环境切换的情况)  
    axios.default.baseURL = 'http://www.xxx';
    ```
-  2. 设置请求超时  
+  3. 设置请求超时  
   通过axios.default.timeout 设置默认的请求时间。例如超过了10秒，就会告知用户请求超时，请刷新等。  
   ```
   axios.default.timeout = 10000; 
   ```
-  3.  请求拦截  
+  4.  请求拦截  
   有时我们在发送请求之前会进行一个请求拦截，希望在请求之前需完成一些操作。比如有一些请求是需要用户登录之后才能访问的，或者post请求的时候，我们需要序列化我们的操作，所以我们会在请求被发送之前进行一个拦截，从而进行我们想要的操作。  
   ```
-  // http request 拦截器
+  // 添加请求拦截器
   axios.interceptors.request.use(
+  // 在发送请求之前做些什么
     config =>{
       config.data => JSON.stringify(config.data);
       config.headers = {
@@ -64,7 +65,7 @@ getData(){
     }
   );
   ```
-  4. 响应的拦截 （异常处理） 
+  5. 响应的拦截 （异常处理） 
   ```
   axios.interceptors.response.use(response => {
     return response
@@ -116,7 +117,7 @@ getData(){
     return Promise.resolve(err.response)
 })  
 ```
-5. 封装get，post，delete和put方法  
+6. 封装get，post，delete和put方法  
 封装get方法
 ```
 export function get(url, params) {
@@ -162,7 +163,7 @@ export function get(url, params) {
      })
    }
    
-  4. 最后是获取数据的接口  
+  7. 最后是获取数据的接口  
   ``` 
   export const server = {
       getData: function(params){
@@ -170,12 +171,12 @@ export function get(url, params) {
       }
   }
   ```
-  5. 在main.js 中引用以上apis.js文件，并定义全局变量  
+  8. 在main.js 中引用以上apis.js文件，并定义全局变量  
   ```
   import { server } from './apis'
   Vue.prototype.$server = server;
   ```
-  6. 最后，在需要调用接口的地方使用  
+  9. 最后，在需要调用接口的地方使用  
   ```
   methods: {
     getData: function(){
@@ -186,6 +187,7 @@ export function get(url, params) {
   ```
   参考地址： https://www.jianshu.com/p/9077baa9d543  
   https://juejin.im/post/5b55c118f265da0f6f1aa354
+  Axios 中文说明： https://www.kancloud.cn/yunye/axios/234845
   
   
   
