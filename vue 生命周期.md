@@ -10,7 +10,7 @@ var vm = new Vue ({
 选项指的是：  
 （1）选项/数据：data，props，propsData，computed，methods，watch  
 （2）选项/dom: el, template, render, renderError,   
-（3）选项/生命周期钩子：beforeCreate, created, beforeMount, mounted, befroeUpdate, updated, activated, deactivated, beforeDestory, destroyed, errorCaptured  4
+（3）选项/生命周期钩子：beforeCreate, created, beforeMount, mounted, befroeUpdate, updated, activated, deactivated, beforeDestory, destroyed, errorCaptured  
 （4）选项/资源：directives, filters, components  
 （5）选项/组合: parent, mixins, extends, provide/inject,  
 （6）选项/其他: name, delimiters, functional, model, inheritAttrs, comments  
